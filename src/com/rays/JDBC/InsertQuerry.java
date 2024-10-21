@@ -16,7 +16,7 @@ public class InsertQuerry {
 		
 		int i = stmt.executeUpdate("insert into marksheet values(7,'ram',18,54,'pass',null)");
 		
-		System.out.println(i);
+		System.out.println("values insert successfully:- " + i);
 		
 		
 		

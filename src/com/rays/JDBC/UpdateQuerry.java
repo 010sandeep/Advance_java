@@ -16,7 +16,7 @@ public class UpdateQuerry {
 		
 		int i = stmt.executeUpdate("update marksheet set name = 'raju' where sno  = 6 ;");
 		
-		System.out.println(i);
+		System.out.println("Upadate marksheet successufully" + i);
 		
 		
 		
