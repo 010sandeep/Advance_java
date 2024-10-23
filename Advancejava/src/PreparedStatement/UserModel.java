@@ -91,20 +91,35 @@ public class UserModel {
 		int i = prst.executeUpdate();
 
 		System.out.println("data updated successfully = " + i);
-
+ 
 	}
 
-	public List search() throws Exception {
+	public List search(UserBean bean) throws Exception {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "root");
+		
+		StringBuffer sql = new StringBuffer("select * from st_user where 1 = 1");
+		
+		if (bean != null) {
 
-		PreparedStatement prst = conn.prepareStatement("select * from st_user");
+			if (bean.getFirstname() != null && bean.getFirstname().length() > 0) {
+
+				sql.append(" and firstname like '" + bean.getFirstname() + "'");
+				
+			}
+			
+			
+		}
+		
+		PreparedStatement prst = conn.prepareStatement(sql.toString());
+		
+		System.out.println("sql = " + sql.toString());
 
 		ResultSet rs = prst.executeQuery();
 
-		UserBean bean = null;
+//		UserBean bean = null;
 
 		List list = new ArrayList();
 
@@ -118,7 +133,7 @@ public class UserModel {
 			bean.setLoginid(rs.getString(4));
 			bean.setPassword(rs.getString(5));
 			bean.setAddress(rs.getString(6));
-			bean.setDob(rs.getTime(7));
+			bean.setDob(rs.getDate(7));
 
 			list.add(bean);
 
@@ -134,7 +149,7 @@ public class UserModel {
 
 		PreparedStatement prst = conn.prepareStatement("select * from st_user where loginid = ? and password = ?");
 
-		prst.setString(1, loginid);
+		prst.setString(1, loginid);  
 		prst.setString(2, password);
 
 		ResultSet rs = prst.executeQuery();
