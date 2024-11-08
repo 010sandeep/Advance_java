@@ -1,6 +1,5 @@
 package PreparedStatement;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
@@ -8,28 +7,53 @@ import java.util.List;
 public class TestUserModel {
 	public static void main(String[] args) throws Exception {
 
-//		testadd();
-//		testDelete();
-//		testUpdate();
-		testsearch();
+//		   testadd();
+//		   testDelete();
+//		   testUpdate();
+	   	   testsearch();
+//		   testAuthenticate();
+	}
+
+	private static void testAuthenticate() throws Exception {
+
+		UserModel model = new UserModel();
+
+		UserBean bean = model.authenticate("Udaydab7@gmail.com", "pass123");
+
+		if (bean != null) {
+			System.out.println(bean.getFirstname());
+			System.out.println(bean.getLastname());
+		} else {
+			System.out.println("user not found");
+		}
 
 	}
 
 	private static void testsearch() throws Exception {
 
 		UserModel model = new UserModel();
-		List list = model.search();
+		
+		UserBean bean = new UserBean();
+		
+		bean.setFirstname("sandeep");
+		
+		
+		List list = model.search(bean);
+		
 		Iterator it = list.iterator();
 
-		UserBean bean = new UserBean();
 
 		while (it.hasNext()) {
 
 			bean = (UserBean) it.next();
 
-			System.out.println(bean.getId());
-			System.out.println(bean.getFirstname());
-
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getFirstname());
+			System.out.print("\t" + bean.getLastname());
+			System.out.print("\t" + bean.getLastname());
+			System.out.print("\t" + bean.getPassword());
+			System.out.print("\t" + bean.getAddress());
+			System.out.println("\t" + bean.getDob());
 		}
 
 	}
@@ -57,7 +81,7 @@ public class TestUserModel {
 	private static void testDelete() throws Exception {
 
 		UserModel model = new UserModel();
-		model.delete(1);
+		model.delete(8);
 
 	}
 
@@ -69,12 +93,12 @@ public class TestUserModel {
 
 		UserBean bean = new UserBean();
 
-		bean.setId(1);
-		bean.setFirstname("sandeep");
-		bean.setLastname("gurjar");
-		bean.setLoginid("sandeep@gmail.com");
+		bean.setId(8);
+		bean.setFirstname("Uday");
+		bean.setLastname("Dabi");
+		bean.setLoginid("Udaydabi735127857@gmail.com");
 		bean.setPassword("pass123");
-		bean.setAddress("bhopal");
+		bean.setAddress("indore");
 		bean.setDob(sdf.parse("2003-02-02"));
 
 		model.add(bean);

@@ -35,7 +35,10 @@ public class TestUserModel {
 		
 		UserBean bean = new UserBean();
 		
-		bean.setFirstname("sandeep");
+//		bean.setFirstname("tarun");
+//		bean.setLoginid("goutam@gmail.com");
+//		bean.setAddress("bhopal");
+//		bean.setLastname("Tarun");
 		
 		
 		List list = model.search(bean);
@@ -50,7 +53,7 @@ public class TestUserModel {
 			System.out.print(bean.getId());
 			System.out.print("\t" + bean.getFirstname());
 			System.out.print("\t" + bean.getLastname());
-			System.out.print("\t" + bean.getLastname());
+			System.out.print("\t" + bean.getLoginid());
 			System.out.print("\t" + bean.getPassword());
 			System.out.print("\t" + bean.getAddress());
 			System.out.println("\t" + bean.getDob());
@@ -81,7 +84,7 @@ public class TestUserModel {
 	private static void testDelete() throws Exception {
 
 		UserModel model = new UserModel();
-		model.delete(8);
+		model.delete(9);
 
 	}
 
@@ -93,10 +96,10 @@ public class TestUserModel {
 
 		UserBean bean = new UserBean();
 
-		bean.setId(8);
+		bean.setId(9);
 		bean.setFirstname("Uday");
 		bean.setLastname("Dabi");
-		bean.setLoginid("Udaydabi735127857@gmail.com");
+		bean.setLoginid("Udaydabi7648246@gmail.com");
 		bean.setPassword("pass123");
 		bean.setAddress("indore");
 		bean.setDob(sdf.parse("2003-02-02"));

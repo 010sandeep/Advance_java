@@ -110,24 +110,6 @@ public class UserModel {
 				
 			}
 			
-			if (bean.getLastname() != null && bean.getLastname().length() > 0) {
-				
-				sql.append(" and lastname like '" + bean.getLastname() + "'");
-				
-			}
-			
-			if (bean.getLoginid() != null && bean.getLoginid().length() > 0) {
-				
-				sql.append(" and loginid like '" + bean.getLoginid() + "'");
-				
-			}
-			
-			if (bean.getAddress() != null && bean.getAddress().length() > 0) {
-				
-				sql.append(" and address like '" + bean.getAddress() + "'"); 
-				
-			}
-			
 			
 		}
 		
