@@ -6,8 +6,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class UserModel {
+	
+	public int nextPK() throws Exception {
+		
+		ResourceBundle rb = ResourceBundle.getBundle("com.rays.Bundle.system");
+
+		int pk=0;
+		Class.forName(rb.getString("driver"));
+		Connection conn=DriverManager.getConnection(rb.getString("url"),rb.getString("username"),rb.getString("password"));
+		PreparedStatement pstmt=conn.prepareStatement("select max(id) from st_user");
+		
+		ResultSet rs=pstmt.executeQuery();
+		
+		while (rs.next()) {
+			
+			pk=rs.getInt(1);
+			System.out.println("Max id="+pk);
+		}
+		return pk+1;
+	}
 
 	public void add(UserBean bean) throws Exception {
 
@@ -40,7 +60,7 @@ public class UserModel {
 			System.out.println("loginId already exists");
 
 		} else {
-			prst.setInt(1, bean.getId());
+			prst.setInt(1, nextPK());
 			prst.setString(2, bean.getFirstname());
 			prst.setString(3, bean.getLastname());
 			prst.setString(4, bean.getLoginid());
@@ -94,7 +114,7 @@ public class UserModel {
  
 	}
 
-	public List search(UserBean bean) throws Exception {
+	public List search (UserBean bean) throws Exception {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 

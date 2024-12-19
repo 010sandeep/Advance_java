@@ -6,10 +6,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.RestoreAction;
 
 public class MarksheetModel {
+	
+public int nextPK() throws Exception {
+		
+		ResourceBundle rb = ResourceBundle.getBundle("com.rays.Bundle.system");
+
+		int pk=0;
+		Class.forName(rb.getString("driver"));
+		Connection conn=DriverManager.getConnection(rb.getString("url"),rb.getString("username"),rb.getString("password"));
+		PreparedStatement pstmt=conn.prepareStatement("select max(id) from marksheets");
+		
+		ResultSet rs=pstmt.executeQuery();
+		
+		while (rs.next()) {
+			
+			pk=rs.getInt(1);
+			System.out.println("Max id="+pk);
+		}
+		return pk+1;
+}
 	
 	public void add(MarksheetBean bean) throws Exception {
 		
@@ -36,7 +56,7 @@ public class MarksheetModel {
 	if (existbean != null) {
 		System.out.println("rollno already exists");
 	}else {
-		pstmt.setInt(1, bean.getId());
+		pstmt.setInt(1, nextPK());
 		pstmt.setInt(2, bean.getRollno());
 		pstmt.setString(3, bean.getName());
 		pstmt.setInt(4, bean.getPhysics());

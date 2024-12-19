@@ -7,10 +7,10 @@ import java.util.List;
 public class TestUserModel {
 	public static void main(String[] args) throws Exception {
 
-//		   testadd();
+		   testadd();
 //		   testDelete();
 //		   testUpdate();
-	   	   testsearch();
+//	   	   testsearch();
 //		   testAuthenticate();
 	}
 
@@ -96,7 +96,7 @@ public class TestUserModel {
 
 		UserBean bean = new UserBean();
 
-		bean.setId(9);
+//		bean.setId(9);
 		bean.setFirstname("Uday");
 		bean.setLastname("Dabi");
 		bean.setLoginid("Udaydabi7648246@gmail.com");
